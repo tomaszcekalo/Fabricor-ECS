@@ -9,11 +9,11 @@ namespace Fabricor.ECS
     }
     public class EntityMetadata
     {
-        public readonly ulong ID;
-        public ulong heapAddress;
+        public readonly long ID;
+        public long heapAddress;
         public ComponentMetadata[] components;
 
-        public EntityMetadata(ulong ID, Type[] components)
+        public EntityMetadata(long ID, Type[] components)
         {
             this.ID = ID;
             this.components = new ComponentMetadata[components.Length];
