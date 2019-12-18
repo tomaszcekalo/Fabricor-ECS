@@ -4,4 +4,9 @@ namespace Fabricor.ECS
     {
         
     }
+
+    public struct SystemWorkload{
+        public long startAddress;
+        public long endAddress;
+    }
 }
