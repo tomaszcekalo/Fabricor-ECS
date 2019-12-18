@@ -2,18 +2,13 @@ using System.Runtime.InteropServices;
 using System;
 namespace Fabricor.ECS
 {
-    public struct Entity
-    {
-        public EntityMetadata metadata;
-        public IComponent[] components;
-    }
     public class EntityMetadata
     {
-        public readonly long ID;
+        public readonly ulong ID;
         public long heapAddress;
         public ComponentMetadata[] components;
 
-        public EntityMetadata(long ID, Type[] components)
+        public EntityMetadata(ulong ID, Type[] components)
         {
             this.ID = ID;
             this.components = new ComponentMetadata[components.Length];
@@ -22,7 +17,7 @@ namespace Fabricor.ECS
             {
                 this.components[i].type=components[i];
                 this.components[i].componentOffset=currentOffset;
-                currentOffset+=(ushort)Marshal.SizeOf(components[i]);
+                currentOffset+=(ushort)components[i].MarshalSize();
             }
         }
         public bool FitsQuery(EntityQuery q)
@@ -53,8 +48,9 @@ namespace Fabricor.ECS
         public ushort componentOffset;
     }
 
-    public interface IComponent
+    public struct Component
     {
-
+        public ushort size;
+        public uint componentID;
     }
 }

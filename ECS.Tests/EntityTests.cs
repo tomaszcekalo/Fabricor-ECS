@@ -34,13 +34,13 @@ namespace ECS.Tests
         }
     }
 
-    struct TestComponentA : IComponent{
-
+    struct TestComponentA{
+        byte b;
     }
-    struct TestComponentB : IComponent{
-        
+    struct TestComponentB{
+        byte b;
     }
-    struct TestComponentC : IComponent{
-        
+    struct TestComponentC{
+        byte b;
     }
 }
