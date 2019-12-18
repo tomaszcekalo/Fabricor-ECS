@@ -6,7 +6,6 @@ namespace Fabricor.ECS
     {
         private static Dictionary<Type,uint> lookup=new Dictionary<Type, uint>();
         private static uint head=0;
-
         public static uint GetUID(Type component){
             if(lookup.ContainsKey(component)){
                 return lookup[component];

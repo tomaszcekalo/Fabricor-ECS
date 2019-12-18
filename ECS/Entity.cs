@@ -12,12 +12,12 @@ namespace Fabricor.ECS
         {
             this.ID = ID;
             this.components = new ComponentMetadata[components.Length];
-            ushort currentOffset=0;
+            ushort currentOffset = 0;
             for (int i = 0; i < components.Length; i++)
             {
-                this.components[i].type=components[i];
-                this.components[i].componentOffset=currentOffset;
-                currentOffset+=(ushort)components[i].MarshalSize();
+                this.components[i].type = components[i];
+                this.components[i].componentOffset = currentOffset;
+                currentOffset += (ushort)components[i].MarshalSize();
             }
         }
         public bool FitsQuery(EntityQuery q)
@@ -52,5 +52,14 @@ namespace Fabricor.ECS
     {
         public ushort size;
         public uint componentID;
+    }
+    /*
+        Include this as a field at the top of your component structs.
+        private ComponentHeader header;
+    */
+    public struct ComponentHeader
+    {
+        private ushort size;
+        private uint componentID;
     }
 }

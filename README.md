@@ -10,3 +10,4 @@ This is a c# ECS framework used in the Fabricor engine.
 * Max heap size is long.MaxValue bytes.
 * In memory a entity is a ushort of how big it is followed by components.
 * In memory a component has to start with a ushort of its size and then a uint representing the component type.
+* In your custom component structs you must include a ComponentHeader struct at the top of the declaration.
