@@ -21,7 +21,7 @@ namespace ECS.Tests
             PrintOutKernel<IntComponent> intprint = new PrintOutKernel<IntComponent>();
             Thread.Sleep(5000);
             Stopwatch stopwatch = Stopwatch.StartNew();
-            heap.ExecuteSystem(new ECSSystem<FloatComponent,RandomFloatKernel>(random), workloads);
+            heap.ExecuteSystem(new ECSLinearStepSystem<FloatComponent,RandomFloatKernel>(random), workloads);
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
             //heap.ExecuteSystem(print,workloads,false);

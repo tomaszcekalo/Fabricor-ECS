@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 
 namespace Fabricor.ECS
 {
-    public unsafe class ECSSystem<T,K> : ECSSystem where T : unmanaged
+    public unsafe class ECSLinearStepSystem<T,K> : ECSSystem where T : unmanaged
                                                             where K : struct,ILinearStepKernel<T>
     {
         private K kernel;
 
-        public ECSSystem(K kernel){
+        public ECSLinearStepSystem(K kernel){
             this.kernel=kernel;
         }
 
