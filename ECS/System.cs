@@ -4,8 +4,14 @@ using System.Runtime.CompilerServices;
 
 namespace Fabricor.ECS
 {
-    public unsafe abstract class ECSSystem<T> : ECSSystem where T : unmanaged
+    public unsafe class ECSSystem<T,K> : ECSSystem where T : unmanaged
+                                                            where K : struct,ILinearStepKernel<T>
     {
+        private K kernel;
+
+        public ECSSystem(K kernel){
+            this.kernel=kernel;
+        }
 
         public override void Execute(byte* start, byte* end)
         {
@@ -32,7 +38,7 @@ namespace Fabricor.ECS
                             head+=c.size;
                             goto case 1;
                         }
-                        Kernel((T*)head);
+                        kernel.Kernel((T*)head);
                         head+=c.size;
                         goto case 1;
                 }
@@ -40,12 +46,11 @@ namespace Fabricor.ECS
                 
             }
         }
+    }
 
-        /*
-        For the love of god, please seal this method. If you don't seal it, it can't be inlined.
-        */
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public abstract void Kernel(T* component);
+    public unsafe interface ILinearStepKernel<T> where T : unmanaged
+    {
+        void Kernel(T* component);
     }
 
     public unsafe abstract class ECSSystem
