@@ -7,6 +7,10 @@
     <PackageId>Fabricor.ECS</PackageId>
     <Version>1.0.0</Version>
     <Authors>SamHSmith</Authors>
+    <Title>A Low-Level ECS Library for High Performance Games</Title>
+    <PackageDescription>Fabricor.ECS is the ECS library used internally in my Fabricor Game Engine. It's extremely low level and has you write your own pointer manipulating "kernels" that manipulate the unmanaged data heap. The library is optimized for minimizing cache line misses.</PackageDescription>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/SamHSmith/Fabricor-ECS</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
