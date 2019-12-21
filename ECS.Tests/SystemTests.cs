@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Threading;
 using System;
 using System.Diagnostics;
@@ -11,21 +12,22 @@ namespace ECS.Tests
         [Test]
         public void SingleThreadSystem()
         {
-            EntityHeap heap = new EntityHeap(1024L * 1024L * 1024L*8L);
-            for (int i = 0; i < 8; i++)
-                heap.AppendEntities(new Type[] { typeof(FloatComponent), typeof(IntComponent) }, 10000000);
+            EntityHeap heap = new EntityHeap(1024L * 1024L);
+            heap.AppendEntities(new Type[] { typeof(FloatComponent), typeof(IntComponent) }, 100);
             SystemWorkload[] workloads = heap.GetSystemWorkloads(6);
 
             RandomFloatKernel random = new RandomFloatKernel();
             PrintOutKernel<FloatComponent> print = new PrintOutKernel<FloatComponent>();
             PrintOutKernel<IntComponent> intprint = new PrintOutKernel<IntComponent>();
-            Thread.Sleep(5000);
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            heap.ExecuteSystem(new ECSLinearStepSystem<FloatComponent,RandomFloatKernel>(random), workloads);
-            stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds);
-            //heap.ExecuteSystem(print,workloads,false);
-            //heap.ExecuteSystem(intprint,workloads);
+
+            Task t1 = heap.ExecuteSystem(new ECSLinearStepSystem<FloatComponent, RandomFloatKernel>(random), workloads);
+            Task t2 = heap.ExecuteSystem(new ECSLinearStepSystem<FloatComponent, PrintOutKernel<FloatComponent>>(print), workloads, false);
+            Task t3 = heap.ExecuteSystem(new ECSLinearStepSystem<IntComponent, PrintOutKernel<IntComponent>>(intprint), workloads, false);
+
+            if (!Task.WaitAll(new Task[] { t1, t2, t3 }, 10000))
+            {
+                throw new TimeoutException("The kernels did not complete within the timout.");
+            }
 
             heap.Free();
         }
@@ -44,7 +46,7 @@ namespace ECS.Tests
         public void Kernel(FloatComponent* component)
         {
             FloatComponent c = (*component);
-            c.f = MathF.Sin(0.45f);
+            c.f = (float)new Random().NextDouble();
             *component = c;
         }
     }

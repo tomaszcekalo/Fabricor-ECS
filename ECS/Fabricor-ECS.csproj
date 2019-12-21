@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Fabricor_ECS</RootNamespace>
+    <RootNamespace>Fabricor.ECS</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
-    <IsPackable>false</IsPackable>
+    <PackageId>Fabricor.ECS</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>SamHSmith</Authors>
   </PropertyGroup>
 
 </Project>
