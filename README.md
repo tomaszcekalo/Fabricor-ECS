@@ -1,3 +1,7 @@
+## Moving to rust
+I am moving my entire dev suite to rust and therefore this package is going to be archived. Feel free to fork it if you so desire.
+
+
 # Fabricor-ECS
 This is a c# ECS framework used in the Fabricor engine.
 
