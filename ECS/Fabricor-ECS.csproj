@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Fabricor.ECS</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageId>Fabricor.ECS</PackageId>
@@ -11,6 +11,7 @@
     <PackageDescription>Fabricor.ECS is the ECS library used internally in my Fabricor Game Engine. It's extremely low level and has you write your own pointer manipulating "kernels" that manipulate the unmanaged data heap. The library is optimized for minimizing cache line misses.</PackageDescription>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/SamHSmith/Fabricor-ECS</RepositoryUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
